@@ -227,9 +227,9 @@ const TEXT = {
       "SDG 9 focuses on resilient infrastructure. A secure Wi-Fi router is part of modern digital infrastructure. This simulator follows the NIST Cybersecurity Framework (CSF): Govern (ownership, policies, updates), Identify (devices, data, risks), Protect (auth, secure config, segmentation, encryption), Detect (alerts, logs), Respond (contain incidents and rotate credentials), and Recover (backup, restore, rebuild). The checklist score reflects reliability, safety, and continuity—key outcomes of SDG 9.",
     processTitle: "Simple implementation process",
     processSteps: [
-      "Go to the Simulator tab (Wi-Fi Router is selected).",
+      "Go to the Simulator tab.",
       "Tick checklist controls.",
-      "Score updates instantly → Copy Brief.",
+      "Score updates instantly → Copy Brief for sharing.",
     ],
     simTitle: "Wi-Fi Simulator",
     simSub: "Tick controls. Score updates instantly.",
@@ -261,7 +261,7 @@ const TEXT = {
   },
   km: {
     appTitle: "Home Router Security Checklist",
-    appSubtitle: "Wi-Fi Router Checklist & Scoring",
+    appSubtitle: "",
     language: "ភាសា",
     tabs: { about: "អំពី", process: "ដំណើរការ", sim: "Simulator" },
     aboutTitle: "ហេតុអ្វី SDG 9 សមស្រប",
@@ -729,14 +729,14 @@ function buildBrief(lang: Lang, f: SimForm, r: ReturnType<typeof evaluateSystem>
 
   return [
     lang === "en"
-      ? `Project: SDG 9 Security System (${t.router})`
-      : `គម្រោង៖ ប្រព័ន្ធសុវត្ថិភាព SDG 9 (${t.router})`,
+      ? `Home Router Security Checklist`
+      : `Home Router Security Checklist`,
     statusLine,
     "",
-    "## Detailed summary",
+    "** Detailed summary",
     ...derived,
     "",
-    "## Inputs (auto-filled)",
+    "** Inputs (auto-filled)",
     `- ${L.systemType}: ${f.systemType}`,
     `- ${L.hardware}: ${f.hardware}`,
     `- ${L.software}: ${f.software}`,
@@ -745,12 +745,12 @@ function buildBrief(lang: Lang, f: SimForm, r: ReturnType<typeof evaluateSystem>
     `- ${L.metric}: ${f.metric}`,
     `- ${L.alignment}: ${f.alignment}`,
     "",
-    "## Checklist (checked)",
+    "** Checklist (checked)",
     ...(checked.length ? checked : [lang === "en" ? "- (none)" : "- (មិនមាន)"]),
     "",
-    "## Checklist (missing)",
+    "** Checklist (missing)",
     ...(missingCtl.length ? missingCtl : [lang === "en" ? "- (none)" : "- (មិនមាន)"]),
-    r.missingRequired.length ? ["", "## Missing required inputs", ...missingReq] : "",
+    r.missingRequired.length ? ["", "** Missing required inputs", ...missingReq] : "",
   ]
     .flat()
     .filter((x) => x !== "")
@@ -1228,23 +1228,6 @@ export default function Page() {
 
                   <TabsContent value="about" className="mt-5">
                     <div className="space-y-4">
-                      <div className="rounded-3xl border bg-background/70 backdrop-blur p-5 md:p-6 shadow-sm">
-                        <div className="flex items-start gap-3">
-                          <div className="h-10 w-10 rounded-2xl bg-black/5 dark:bg-white/10 flex items-center justify-center shrink-0">
-                            <BookOpen className="h-5 w-5 opacity-80" />
-                          </div>
-
-                          <div className="min-w-0 space-y-1">
-                            <h3 className="text-lg md:text-xl font-semibold tracking-tight">
-                              {t.aboutTitle}
-                            </h3>
-                            <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
-                              {t.aboutBody}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="rounded-3xl border bg-background p-5 md:p-6 shadow-sm">
                           <div className="flex items-center gap-2">
@@ -1279,7 +1262,7 @@ export default function Page() {
   <div className="flex items-center gap-2">
     <Shield className="h-5 w-5 opacity-80" />
     <div className="text-sm font-semibold">
-      {lang === "en" ? "NIST CSF Framework (one-row)" : "NIST CSF Framework (ជាជួរតែមួយ)"}
+      {lang === "en" ? "NIST CSF Framework" : "NIST CSF Framework"}
     </div>
   </div>
 
